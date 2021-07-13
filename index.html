@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <script src="calc.js"></script>
+    <title>mothflat</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="center">
+      <h1>Damage Calculator</h1>
+    </div>
+    <br>
+    <div class="contain">
+      <form id="calcForm" autocomplete="off">
+        <input id="sBP" placeholder="Power" type="number" min="0" max="1000">
+        <select id="sResist">
+          <option value="0.7">Resist</option>
+          <option value="1" selected>Neutral</option>
+          <option value="1.5">Weak</option>
+        </select>
+        <label for="sCrit">Critical</label>
+        <input id="sCrit" type="checkbox">
+        <label for="sCharge">Charge/Conc</label>
+        <input id="sCharge" type="checkbox">
+        <br>
+        <input id="sAtk" placeholder="Attack" type="number" min="0" max="10000">
+        <select id="sTaru">
+          <option value="1">Tarukaja</option>
+          <option value="0" selected>None</option>
+          <option value="-1">Tarunda</option>
+        </select>
+        <input id="sDef" placeholder="Defense" type="number" min="0" max="10000">
+        <select id="sRaku">
+          <option value="1">Rakukaja</option>
+          <option value="0" selected>None</option>
+          <option value="-1">Rakunda</option>
+        </select>
+        <hr>
+        <input id="bName" placeholder="Name" size="20">
+        <button id="bAdd" type="button">Add Boost</button>
+        <br>
+        <input id="bValue1" placeholder="Boost 1" type="number" min="-1000" max="1000">
+        <select id="bCondition1">
+          <option value="-1">Always</option>
+          <option value="1">On Crit</option>
+          <option value="2">On Weak</option>
+        </select>
+        <input id="bValue2" placeholder="Boost 2" type="number" min="-1000" max="1000">
+        <select id="bCondition2">
+          <option value="0">N/A</option>
+          <option value="1">On Crit</option>
+          <option value="2">On Weak</option>
+        </select>
+        <table id="bTable"></table>
+        <hr>
+        <div class="center">
+          <h1><span id="dLow">0</span> - <span id="dHigh">0</span></h1>
+          <button id="calcSave" type="button">Save</button>
+        </div>
+      </form>
+    </div>
+    <br>
+    <div class="contain">
+      <div class="center">
+        <h2>Saved Calculations</h2>
+      </div>
+      <br>
+      <table id="calcTable">
+        <tr>
+          <th>Damage</th>
+          <th>BP</th>
+          <th>Boost %</th>
+          <th>Atk</th>
+          <th>Taru</th>
+          <th>Def</th>
+          <th>Raku</th>
+          <th>Resist</th>
+          <th>Crit</th>
+          <th>Charge</th>
+          <th>Remove</th>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div class="center">
+      <small id="notes">Click for notes</small>
+      <br>
+      <small><a>Source</a></small>
+    </div>
+    <script>
+document.getElementById("bAdd").addEventListener("click", addBoost);
+document.getElementById("calcForm").addEventListener("input", update);
+document.getElementById("calcSave").addEventListener("click", saveCalc);
+document.getElementById("notes").addEventListener("click", e => {
+  const x = e.target;
+  if(x.innerText != "Click for notes") {
+    x.innerText = "Click for notes";
+  } else {
+    x.innerText = `Automatically calculates once all necessary info is filled in.
+    The first column of the boost table is for always active boosts.
+    The second colum is for boosts that activate on crits.
+    The third is for boosts on weak points.
+    Crit/weak conditional boosts won't be used in calculations unless their respective conditions are active.
+    Mixed boosts like Sadistic Blow will only have their active components used in calculations.
+    Beserk/skill levels/BT handicaps all go under boosts, de/buffs do not.
+    Boosts can be negative, e.g.) BT handicaps, Law of Hell, Pierce (weak), etc.
+    Saved calculations are just for comparison; you can't actually recall them or anything (yet...).`;
+  }
+});
+    </script>
+  </body>
+</html>

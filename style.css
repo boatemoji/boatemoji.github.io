@@ -1,0 +1,42 @@
+body {
+  background-color: #212121;
+  color: #ffffff;
+  font-family: "Mulish", sans-serif;
+}
+
+input, select, option, button {
+  font-family: inherit;
+  border-radius: 2px;
+  border: 1px solid #c7c7c7;
+}
+
+table, tr, td, th {
+  border-collapse: collapse;
+  border: 1px solid #c7c7c7;
+}
+
+td, th {
+  padding: 2px 6px;
+}
+
+div.contain {
+  background-color: #484848;
+  padding: 20px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+div * {
+  margin: 4px 0px;
+}
+
+.b0 {
+  color: #484848;
+}
