@@ -84,10 +84,29 @@
       </table>
     </div>
     <br>
+    <div style="width: 40%; margin-left: auto; margin-right: auto; font-size: 90%">
+      <div class="center"><h3>Directions</h3></div>
+      <ul>
+        <li>Input stats and conditions: base power, attack, defense, de/buffs, etc.
+          <ul>
+            <li>Calculations will automatically occur once BP, attack, and defense are filled in</li>
+          </ul>
+        </li>
+        <li>Add any boost/modifiers by entering the percent boost(s) and conditions(always, on crit, or on weak)
+          <ul>
+            <li>The name doesn't actually matter, its just for convinience/clarity</li>
+            <li>If the boost only has one boost (like Amp skills, Butcher, etc.) select "N/A" in the 2nd dropdown</li>
+            <li>Boosts will be added to a table (that doesn't exist initally)</li>
+          </ul>
+        </li>
+        <li>If you wish to compare your current calc to compare to other calculations, click "Save" and it will be added to the table above</li>
+      </ul>
+    </div>
+    <br>
     <div class="center">
-      <small id="notes">Click for notes</small>
+      <small id="notes">Click for extra notes</small>
       <br>
-      <small><a href="https://github.com/boatemoji/boatemoji.github.io">Source</a></small>
+      <small><a href="https://github.com/boatemoji/boatemoji.github.io" target="_blank">Source</a></small>
     </div>
     <script>
 document.getElementById("bAdd").addEventListener("click", addBoost);
@@ -95,11 +114,10 @@ document.getElementById("calcForm").addEventListener("input", update);
 document.getElementById("calcSave").addEventListener("click", saveCalc);
 document.getElementById("notes").addEventListener("click", e => {
   const x = e.target;
-  if(x.innerText != "Click for notes") {
-    x.innerText = "Click for notes";
+  if(x.innerText != "Click for extra notes") {
+    x.innerText = "Click for extra notes";
   } else {
-    x.innerText = `Automatically calculates once all necessary info is filled in.
-    The first column of the boost table is for always active boosts.
+    x.innerText = `The first column of the boost table is for always active boosts.
     The second colum is for boosts that activate on crits.
     The third is for boosts on weak points.
     Crit/weak conditional boosts won't be used in calculations unless their respective conditions are active.
