@@ -100,6 +100,7 @@
           </ul>
         </li>
         <li>If you wish to compare your current calc to compare to other calculations, click "Save" and it will be added to the table above</li>
+        <li>If you need to calculate damage with mixed scaling moves like Ragnarok, see the widget below</li>
       </ul>
     </div>
     <br>
@@ -136,6 +137,7 @@ document.getElementById("mUse").addEventListener("click", e => {
   if(!stat) return;
   document.getElementById("sAtk").value = stat;
   document.getElementById("sAtk").focus();
+  update();
 });
 document.getElementById("notes").addEventListener("click", e => {
   const x = e.target;
