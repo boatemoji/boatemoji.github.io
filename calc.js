@@ -3,19 +3,18 @@ var boostCount = 1;
 var calculations = [];
 var calcCount = 1;
 const value = id => document.getElementById(id).value;
-
 //New entry in boosts
 function newBoost() {
-    if(!+value("bValue1")) return 0;
+    if(!parseInt(value("bValue1"))) return 0;
 
     let b = {};
     b.name = value("bName") || "Boost " + boostCount;
-    b.value1 = +value("bValue1");
+    b.value1 = parseInt(value("bValue1"));
     //-1 always; 0 n/a; 1 crit; 2 weak
-    b.cond1 = +value("bCondition1");
-    b.cond2 = +value("bCondition2");
+    b.cond1 = parseInt(value("bCondition1"));
+    b.cond2 = parseInt(value("bCondition2"));
     if(!b.cond2) b.value2 = 0;
-    else b.value2 = +value("bValue2");
+    else b.value2 = parseInt(value("bValue2"));
     b.id = boostCount++;
     b.enabled = true;
 
@@ -157,7 +156,7 @@ function boostEnable(id) {
 }
 
 //get buff swing modifier: tarukaja/rakunda = +20%, rakuka/tarunda = -20%
-const buffs = () => 1 + 0.2 * +value("sTaru") - 0.2 * +value("sRaku");
+const buffs = () => 1 + 0.2 * parseInt(value("sTaru")) - 0.2 * parseInt(value("sRaku"));
 
 //crit is 1.5x
 const crit = () => 1 + 0.5 * document.getElementById("sCrit").checked;
@@ -168,10 +167,10 @@ const charge = () => 1 + 1.25 * document.getElementById("sCharge").checked;
 //see dx2wiki formula page
 function calculate() {
     if(check()) return 0;
-    const atk = +value("sAtk");
+    const atk = parseInt(value("sAtk"));
     const stat = Math.max(atk - value("sDef") * 0.5, 0) * buffs();
     const final = Math.max(atk * 0.25, stat);
-    const damage = final * +value("sBP") * crit() * +value("sResist") * getBoosts() * charge() * 0.4 / 100;
+    const damage = final * parseInt(value("sBP")) * crit() * parseInt(value("sResist")) * getBoosts() * charge() * 0.4 / 100;
     return [~~(damage * 0.95), ~~(damage * 1.05)];
 }
 
@@ -196,7 +195,7 @@ function getCalc() {
     let resSel = document.getElementById("sResist");
     //wtf is this should i be abstractioning
     return [calcCount++, d[0] + " - " + d[1], value("sBP"), Math.round((getBoosts() - 1) * 100) + "%", 
-    value("sAtk"), buff[+value("sTaru") + 1], value("sDef"), buff[+value("sRaku") + 1], 
+    value("sAtk"), buff[parseInt(value("sTaru")) + 1], value("sDef"), buff[parseInt(value("sRaku")) + 1], 
     resSel.options[resSel.selectedIndex].text, 
     document.getElementById("sCrit").checked ? "Yes" : "No",
     document.getElementById("sCharge").checked ? "Yes" : "No"];
@@ -227,8 +226,8 @@ function saveCalc() {
 
 //calc mixed scaling function stat
 function mixedScaling() {
-    const s1 = +value("mAtk1") * +value("mPercent1") / 100;
-    const s2 = +value("mAtk2") * +value("mPercent2") / 100;
+    const s1 = parseInt(value("mAtk1")) * parseInt(value("mPercent1")) / 100;
+    const s2 = parseInt(value("mAtk2")) * parseInt(value("mPercent2")) / 100;
     return s1 + s2;
 } 
 
