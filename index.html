@@ -92,12 +92,12 @@
             <li>Calculations will automatically occur once BP, attack, and defense are filled in</li>
           </ul>
         </li>
-        <li>Add any boost/modifiers by entering the percent boost(s) and conditions(always, on crit, or on weak)
+        <li>Add any boosts/modifiers by entering the percent boost(s) and conditions(always, on crit, or on weak)
           <ul>
             <li>The name doesn't actually matter, its just for convinience/clarity</li>
             <li>If the boost only has one boost (like Amp skills, Butcher, etc.) select "N/A" in the 2nd dropdown</li>
-            <li>Boosts will be added to a table (that doesn't exist initally)</li>
-            <li>The unchecking checkbox next to the name will omit said boost from being used in calculations</li>
+            <li>Boosts will be added to the boost table (that doesn't exist initally)</li>
+            <li>Unchecking the checkbox next to the name will omit said boost from being used in calculations</li>
           </ul>
         </li>
         <li>If you wish to compare your current calc to compare to other calculations, click "Save" and it will be added to the table above</li>
@@ -124,7 +124,7 @@
     </div>
     <br>
     <div class="center">
-      <small id="notes">Click for extra notes</small>
+      <small id="notes">Click this for extra notes</small>
       <br>
       <small><a href="https://github.com/boatemoji/boatemoji.github.io" target="_blank">Source</a></small>
     </div>
@@ -142,8 +142,8 @@ document.getElementById("mUse").addEventListener("click", e => {
 });
 document.getElementById("notes").addEventListener("click", e => {
   const x = e.target;
-  if(x.innerText != "Click for extra notes") {
-    x.innerText = "Click for extra notes";
+  if(x.innerText != "Click this for extra notes") {
+    x.innerText = "Click this for extra notes";
   } else {
     x.innerText = `The first column of the boost table is for always active boosts.
     The second colum is for boosts that activate on crits.
