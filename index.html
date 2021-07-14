@@ -103,6 +103,24 @@
       </ul>
     </div>
     <br>
+    <div class="contain">
+      <form id="mixedForm">
+        <div class="center">
+          <h3>Mixed Scaling</h3>
+          <input id="mAtk1" type="number" placeholder="Stat 1" min="0" max="10000">
+          <input id="mPercent1" type="number" placeholder="Scale" min="0" max="100">
+          <label for="mPercent1">%</label>
+          <br>
+          <input id="mAtk2" type="number" placeholder="Stat 2" min="0" max="10000">
+          <input id="mPercent2" type="number" placeholder="Scale" min="0" max="100">
+          <label for="mPercent2">%</label>
+          <br>
+          <h4>Functional Atk Stat<br><span id="mScaled">0</span></h4>
+          <button type="button" id="mUse">Use</button>
+        </div>
+      </form>
+    </div>
+    <br>
     <div class="center">
       <small id="notes">Click for extra notes</small>
       <br>
@@ -112,6 +130,13 @@
 document.getElementById("bAdd").addEventListener("click", addBoost);
 document.getElementById("calcForm").addEventListener("input", update);
 document.getElementById("calcSave").addEventListener("click", saveCalc);
+document.getElementById("mixedForm").addEventListener("input", updateMScale);
+document.getElementById("mUse").addEventListener("click", e => {
+  let stat = mixedScaling();
+  if(!stat) return;
+  document.getElementById("sAtk").value = stat;
+  document.getElementById("sAtk").focus();
+});
 document.getElementById("notes").addEventListener("click", e => {
   const x = e.target;
   if(x.innerText != "Click for extra notes") {

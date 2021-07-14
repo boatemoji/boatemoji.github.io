@@ -203,3 +203,14 @@ function saveCalc() {
     calculations.push(c);
     addCalc(c);
 }
+
+//calc mixed scaling function stat
+function mixedScaling() {
+    const s1 = +value("mAtk1") * +value("mPercent1") / 100;
+    const s2 = +value("mAtk2") * +value("mPercent2") / 100;
+    return s1 + s2;
+} 
+
+function updateMScale() {
+    document.getElementById("mScaled").innerText = mixedScaling();
+}
