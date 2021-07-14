@@ -17,6 +17,7 @@ function newBoost() {
     if(!b.cond2) b.value2 = 0;
     else b.value2 = +value("bValue2");
     b.id = boostCount++;
+    b.enabled = true;
 
     boosts.push(b);
     return makeBoostElem(b);
@@ -33,8 +34,14 @@ function makeBoostElem(b) {
     let tr = document.createElement("tr");
     tr.id = "b" + b.id;
     
-    let name = elemHelper("th", b.name);
-    
+    let name = elemHelper("th", b.name + " ");
+    //checkbox to dis/enable boost
+    let enable = document.createElement("input");
+    enable.setAttribute("type", "checkbox");
+    enable.addEventListener("click", boostEnable(b.id));
+    enable.setAttribute("checked", "checked");
+    name.append(enable);
+
     //always, on crit, on weak
     let percents = [elemHelper("td", "0%"), elemHelper("td", "0%"), elemHelper("td", "0%")];
     percents.forEach(td => td.classList.add("b0"));
@@ -125,6 +132,8 @@ function getBoosts() {
     const weak = value("sResist") == "1.5";
     
     for(const b of boosts) {
+        //skip if boost is unchecked/disabled
+        if(!b.enabled) continue;
         //if condition = crit & critting; cond = weakpont & weakpoint; always
         if((b.cond1 == 1 && crit) || (b.cond1 == 2 && weak) || (b.cond1 == -1))
             boost += b.value1;
@@ -133,6 +142,18 @@ function getBoosts() {
     }
     
     return 1 + boost / 100; //percentage modifier
+}
+
+//hof for event listener for dis/enabling boosts
+function boostEnable(id) {
+    return e => {
+        for(let b of boosts) {
+            console.log(e.target.checked);
+            if(b.id == id) b.enabled = e.target.checked;
+            console.log(b.enabled);
+        }
+        update();
+    }
 }
 
 //get buff swing modifier: tarukaja/rakunda = +20%, rakuka/tarunda = -20%
@@ -174,7 +195,7 @@ function getCalc() {
     let buff = ["-unda", "None", "-kaja"];
     let resSel = document.getElementById("sResist");
     //wtf is this should i be abstractioning
-    return [calcCount++, d[0] + " - " + d[1], value("sBP"), ~~((getBoosts() - 1) * 100) + "%", 
+    return [calcCount++, d[0] + " - " + d[1], value("sBP"), Math.round((getBoosts() - 1) * 100) + "%", 
     value("sAtk"), buff[+value("sTaru") + 1], value("sDef"), buff[+value("sRaku") + 1], 
     resSel.options[resSel.selectedIndex].text, 
     document.getElementById("sCrit").checked ? "Yes" : "No",
